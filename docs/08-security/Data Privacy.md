@@ -24,7 +24,7 @@ TravelMate AI is designed to comply with the **Digital Personal Data Protection 
 ### 2.1 What We Collect
 | Data Point | Purpose | Storage |
 |---|---|---|
-| Name & Email | Account creation, communications | Clerk + PostgreSQL |
+| Name & Email | Account creation, communications | Supabase + PostgreSQL |
 | Home Address | Default origin for trips | PostgreSQL (`user_preferences`) |
 | Current Location (GPS) | "Plan from here" feature | Never stored; used ephemerally in browser |
 | Travel Routes | Core service | PostgreSQL (`trip_plans`) |
@@ -38,7 +38,7 @@ Users can delete their account from the `/profile` page.
 2. Webhook triggers `UserAccountDeleted` event.
 3. Stripe subscription is immediately cancelled.
 4. User record in PostgreSQL is soft-deleted (`deleted_at` = NOW()).
-5. User is immediately logged out and Clerk identity is deleted.
+5. User is immediately logged out and Supabase identity is deleted.
 6. A background task runs after 72 hours to permanently anonymize the data:
    - `email` → `deleted_user_{uuid}`
    - `full_name` → `Deleted User`
@@ -58,7 +58,7 @@ We share data with third parties *only* to fulfill the core service. We have sig
 
 | Vendor | Data Shared | Purpose |
 |---|---|---|
-| Clerk | Email, Name | Authentication |
+| Supabase | Email, Name | Authentication |
 | Stripe | Email | Billing |
 | Google Gemini | Origin, Destination, Dates | AI trip planning |
 | Google Maps | Origin/Dest text strings | Geocoding |

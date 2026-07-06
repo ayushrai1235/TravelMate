@@ -76,7 +76,7 @@ graph TB
     subgraph "Managed Services"
         PostgreSQL[("PostgreSQL")]
         Redis[("Redis")]
-        Clerk["Clerk Auth"]
+        Supabase["Supabase Auth"]
         Stripe["Stripe Payments"]
     end
     
@@ -84,7 +84,7 @@ graph TB
     BFF --> FastAPI
     FastAPI --> PostgreSQL
     FastAPI --> Redis
-    FastAPI --> Clerk
+    FastAPI --> Supabase
     FastAPI --> Stripe
     Celery --> PostgreSQL
     Celery --> Redis

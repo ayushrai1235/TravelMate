@@ -14,7 +14,7 @@ TravelMate AI uses two event patterns:
 | Pattern | Technology | Use Case |
 |---|---|---|
 | **Domain Events** (in-process) | Python function calls; asyncio | Business logic coordination within monolith |
-| **External Events** (webhooks) | HTTP POST webhooks | Stripe, Clerk callbacks |
+| **External Events** (webhooks) | HTTP POST webhooks | Stripe, Supabase callbacks |
 | **Background Events** | Celery task queue via Redis | Async processing, scheduled tasks |
 
 ---
@@ -36,18 +36,18 @@ TravelMate AI uses two event patterns:
 
 | Event | Trigger | Handlers |
 |---|---|---|
-| `UserSignedUp` | Clerk webhook: user.created | → UserRepository (create profile) → WelcomeEmail (send) |
-| `UserSignedIn` | Clerk session created | → PreferenceService (load) → AnalyticsService (track) |
+| `UserSignedUp` | Supabase webhook: user.created | → UserRepository (create profile) → WelcomeEmail (send) |
+| `UserSignedIn` | Supabase session created | → PreferenceService (load) → AnalyticsService (track) |
 | `UserPreferencesUpdated` | User saves profile changes | → UserRepository (update) |
-| `UserAccountDeleted` | User requests deletion | → DataPurgeService (72h process) → Clerk (delete) → Stripe (cancel sub) |
+| `UserAccountDeleted` | User requests deletion | → DataPurgeService (72h process) → Supabase (delete) → Stripe (cancel sub) |
 
 ### 2.3 Payment Events
 
 | Event | Trigger | Handlers |
 |---|---|---|
-| `SubscriptionCreated` | Stripe webhook: checkout.session.completed | → UserRepository (update tier) → Clerk (update metadata) → WelcomeEmail |
+| `SubscriptionCreated` | Stripe webhook: checkout.session.completed | → UserRepository (update tier) → Supabase (update metadata) → WelcomeEmail |
 | `SubscriptionRenewed` | Stripe webhook: invoice.paid | → UserRepository (extend period) |
-| `SubscriptionCancelled` | Stripe webhook: customer.subscription.deleted | → UserRepository (downgrade to Free) → Clerk (update) |
+| `SubscriptionCancelled` | Stripe webhook: customer.subscription.deleted | → UserRepository (downgrade to Free) → Supabase (update) |
 | `PaymentFailed` | Stripe webhook: invoice.payment_failed | → UserNotification (payment failed email) |
 
 ### 2.4 Notification Events
@@ -100,7 +100,7 @@ sequenceDiagram
     participant NextJS as Next.js Webhook Route
     participant FastAPI
     participant DB as PostgreSQL
-    participant Clerk
+    participant Supabase
 
     Stripe->>NextJS: POST /api/webhooks/stripe
     NextJS->>NextJS: Verify Stripe signature
@@ -108,7 +108,7 @@ sequenceDiagram
     
     alt checkout.session.completed
         FastAPI->>DB: Update user subscription tier
-        FastAPI->>Clerk: Update user metadata (tier)
+        FastAPI->>Supabase: Update user metadata (tier)
         FastAPI->>FastAPI: Emit: SubscriptionCreated
     else invoice.payment_failed
         FastAPI->>DB: Log payment failure
@@ -116,7 +116,7 @@ sequenceDiagram
         FastAPI->>FastAPI: Queue notification email
     else customer.subscription.deleted
         FastAPI->>DB: Downgrade user to Free
-        FastAPI->>Clerk: Update metadata
+        FastAPI->>Supabase: Update metadata
         FastAPI->>FastAPI: Emit: SubscriptionCancelled
     end
 ```
@@ -171,8 +171,8 @@ sequenceDiagram
 - **Idempotency:** Each event has a unique `event.id`; stored in processed_events table; duplicate events are ignored
 - **Retry:** Stripe retries failed webhooks for up to 72 hours with exponential backoff
 
-### 5.2 Clerk Webhooks
+### 5.2 Supabase Webhooks
 
-- **Endpoint:** `POST /api/webhooks/clerk`
-- **Verification:** Svix signature verification using Clerk webhook secret
+- **Endpoint:** `POST /api/webhooks/supabase`
+- **Verification:** Svix signature verification using Supabase webhook secret
 - **Events handled:** `user.created`, `user.updated`, `user.deleted`

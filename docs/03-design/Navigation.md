@@ -12,8 +12,8 @@
 | Route | Page | Auth Required | Tier Required |
 |---|---|---|---|
 | `/` | Landing page | No | None |
-| `/sign-in` | Clerk sign-in | No | None |
-| `/sign-up` | Clerk sign-up | No | None |
+| `/sign-in` | Supabase sign-in | No | None |
+| `/sign-up` | Supabase sign-up | No | None |
 | `/planner` | Trip planner | No (3 free) | Free |
 | `/trips` | Trip history | Yes | Free |
 | `/trips/[id]` | Single trip view | Yes | Free |
@@ -111,7 +111,7 @@ All routes are directly addressable URLs for:
 
 ```
 Next.js Middleware (middleware.ts)
-├── Check Clerk session
+├── Check Supabase session
 ├── If not authenticated + route requires auth:
 │   └── Redirect to /sign-in?redirect_url=[current_path]
 ├── If authenticated + route is /sign-in:
@@ -121,4 +121,4 @@ Next.js Middleware (middleware.ts)
 └── All other routes: Allow
 ```
 
-**Implementation:** Clerk's `clerkMiddleware()` with `createRouteMatcher()` for protected paths.
+**Implementation:** Supabase's `clerkMiddleware()` with `createRouteMatcher()` for protected paths.

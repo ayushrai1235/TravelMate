@@ -42,7 +42,7 @@ graph TB
 
     subgraph Backend["FastAPI Backend (Railway)"]
         APIGateway["API Gateway / Router"]
-        AuthMiddleware["Clerk Auth Middleware"]
+        AuthMiddleware["Supabase Auth Middleware"]
         TripService["Trip Planning Service"]
         AgentOrchestrator["LangGraph Orchestrator"]
         UserService["User Service"]
@@ -74,7 +74,7 @@ graph TB
         OpenWeather["OpenWeatherMap"]
         Amadeus["Amadeus Flights"]
         Gemini["Gemini API (Google)"]
-        Clerk["Clerk Auth"]
+        Supabase["Supabase Auth"]
         Stripe["Stripe"]
         Cloudinary["Cloudinary"]
         SendGrid["SendGrid / Resend"]
@@ -131,7 +131,7 @@ Users access TravelMate AI via:
 **BFF Pattern Rationale:**
 Next.js API routes act as an adapter between the frontend and FastAPI. This:
 1. Hides the FastAPI URL from public exposure
-2. Allows Next.js to add Clerk session verification before passing to FastAPI
+2. Allows Next.js to add Supabase session verification before passing to FastAPI
 3. Enables request/response transformation at the edge
 4. Simplifies CORS configuration (same-origin requests)
 
@@ -213,7 +213,7 @@ sequenceDiagram
 
     User->>NextJS: Enter origin → destination, click "Plan Trip"
     NextJS->>BFFAPI: POST /api/trips/plan
-    BFFAPI->>BFFAPI: Verify Clerk session
+    BFFAPI->>BFFAPI: Verify Supabase session
     BFFAPI->>FastAPI: POST /v1/trips/plan (with user_id)
     FastAPI->>FastAPI: Validate request (Pydantic)
     FastAPI->>Redis: Check cache for identical query
@@ -258,20 +258,20 @@ sequenceDiagram
 sequenceDiagram
     participant User
     participant NextJS
-    participant Clerk
+    participant Supabase
     participant BFFAPI
     participant FastAPI
 
     User->>NextJS: Click "Sign In"
-    NextJS->>Clerk: Redirect to Clerk-hosted sign-in UI
-    User->>Clerk: Enter email / Google OAuth
-    Clerk->>Clerk: Verify identity
-    Clerk-->>NextJS: Redirect with session cookie + JWT
+    NextJS->>Supabase: Redirect to Supabase-hosted sign-in UI
+    User->>Supabase: Enter email / Google OAuth
+    Supabase->>Supabase: Verify identity
+    Supabase-->>NextJS: Redirect with session cookie + JWT
     
     User->>NextJS: Make protected request
     NextJS->>BFFAPI: Request + session cookie
-    BFFAPI->>Clerk: Verify session via Clerk SDK
-    Clerk-->>BFFAPI: User object (user_id, email, metadata)
+    BFFAPI->>Supabase: Verify session via Supabase SDK
+    Supabase-->>BFFAPI: User object (user_id, email, metadata)
     BFFAPI->>FastAPI: Request + user_id header
     FastAPI->>FastAPI: Validate user_id in middleware
     FastAPI-->>BFFAPI: Response
@@ -322,7 +322,7 @@ sequenceDiagram
 **Decision:** Next.js API routes as Backend-for-Frontend rather than direct browser-to-FastAPI calls
 
 **Rationale:**
-- Clerk session verification at the edge (Next.js middleware)
+- Supabase session verification at the edge (Next.js middleware)
 - FastAPI URL not exposed to browser (security)
 - Can apply edge caching on Vercel for some responses
 - Consistent request/response contracts between frontend and backend

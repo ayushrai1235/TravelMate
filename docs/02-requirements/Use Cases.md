@@ -175,14 +175,14 @@
    - Shows current usage: "You've used all 3 free trips this month"
    - Displays tier comparison: Explorer (₹99/mo), Pro (₹249/mo), Business (₹999/mo)
 4. User selects "Explorer" and clicks "Subscribe"
-5. Clerk checks authentication (redirect to login if needed)
+5. Supabase checks authentication (redirect to login if needed)
 6. Stripe Checkout session created with Explorer price
 7. User redirected to Stripe Checkout (hosted page)
 8. User enters payment details and submits
 9. Stripe webhook fires: `checkout.session.completed`
 10. Backend processes webhook:
     - Updates user subscription status in database
-    - Clerk metadata updated with tier
+    - Supabase metadata updated with tier
 11. User redirected back to TravelMate AI
 12. Trip plan limit removed; user can continue planning
 
@@ -253,13 +253,13 @@
 ## UC-008: Admin Reviews Usage Dashboard
 
 **Actor:** Admin user  
-**Precondition:** User has admin role in Clerk  
+**Precondition:** User has admin role in Supabase  
 **Trigger:** Admin navigates to /admin
 
 ### Main Success Scenario
 
 1. Admin opens /admin route
-2. Middleware verifies Clerk session + admin role
+2. Middleware verifies Supabase session + admin role
 3. Dashboard displays:
    - Total users (registered, active today)
    - Trips planned today / this week / this month

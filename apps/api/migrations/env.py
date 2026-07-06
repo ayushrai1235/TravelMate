@@ -10,7 +10,7 @@ from alembic import context
 from app.core.config import settings
 from app.infrastructure.database.connection import Base
 # Import all your models here so Alembic can see them
-from app.infrastructure.database.models import User
+from app.infrastructure.database import models  # noqa: F401
 
 config = context.config
 

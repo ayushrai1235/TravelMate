@@ -331,7 +331,7 @@
 
 **Trigger:** User's subscription has lapsed (non-payment) but they attempt to use a paid feature
 
-**Detection:** Clerk session + Stripe subscription status = `past_due` or `canceled`
+**Detection:** Supabase session + Stripe subscription status = `past_due` or `canceled`
 
 **Required Behavior:**
 1. Allow current session to complete active trip plan

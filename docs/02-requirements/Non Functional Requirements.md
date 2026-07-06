@@ -75,7 +75,7 @@
 
 | NFR ID | Requirement | Implementation |
 |---|---|---|
-| NFR-SEC-001 | Authentication for protected endpoints | Clerk JWT verification in FastAPI middleware |
+| NFR-SEC-001 | Authentication for protected endpoints | Supabase JWT verification in FastAPI middleware |
 | NFR-SEC-002 | Transport Layer Security | TLS 1.3 minimum; HSTS enabled |
 | NFR-SEC-003 | Data encryption at rest | AES-256 for sensitive fields; PostgreSQL encrypted tablespace |
 | NFR-SEC-004 | API rate limiting | 100 req/min per authenticated user; 10 req/min per IP (unauth) |

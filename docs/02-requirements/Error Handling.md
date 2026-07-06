@@ -70,7 +70,7 @@ TravelMate AI follows these principles for error handling:
 | GTFS Bus feeds | Parse error / 404 | Try next available feed | Google Transit API |
 | Amadeus Flights | 401 / 500 | Re-auth + retry | Show "Flight search unavailable" |
 | OpenWeatherMap | 500 / timeout | Retry once | Hide weather widget gracefully |
-| Clerk Auth | 500 | Retry twice | Show "Auth service temporarily down" |
+| Supabase Auth | 500 | Retry twice | Show "Auth service temporarily down" |
 | Stripe | 500 | Retry; Stripe has high reliability | "Payment processing unavailable — try again" |
 
 ---

@@ -19,7 +19,7 @@ erDiagram
     TRIP_PLANS ||--o{ NOTIFICATIONS : triggers
     
     USERS {
-        uuid id PK "Matches Clerk ID"
+        uuid id PK "Matches Supabase ID"
         varchar email UK
         varchar full_name
         varchar subscription_tier
@@ -104,7 +104,7 @@ Traditional travel apps create separate tables for trips, legs, segments, and tr
 - Immutable snapshot of the trip exactly as the AI planned it.
 
 ### 2.2 Auth Separation
-Authentication state (passwords, MFA, social links) lives entirely in Clerk. Our `USERS` table only holds the UUID and profile fields necessary for our application's foreign keys and business logic.
+Authentication state (passwords, MFA, social links) lives entirely in Supabase. Our `USERS` table only holds the UUID and profile fields necessary for our application's foreign keys and business logic.
 
 ### 2.3 Soft Deletion
 `USERS` and `TRIP_PLANS` use `deleted_at` instead of hard deletion. This preserves foreign key integrity in `AUDIT_LOGS` and `NOTIFICATIONS` for historical reporting. A periodic background task anonymizes PII from soft-deleted users after 72 hours (DPDP Act compliance).

@@ -21,11 +21,11 @@
 ## 2. Table Definitions
 
 ### 2.1 `users`
-Core user identity (synced from Clerk).
+Core user identity (synced from Supabase).
 
 | Column | Type | Constraints | Description |
 |---|---|---|---|
-| `id` | UUID | PRIMARY KEY | Matches Clerk user_id |
+| `id` | UUID | PRIMARY KEY | Matches Supabase user_id |
 | `email` | VARCHAR(255) | UNIQUE, NOT NULL | User's primary email |
 | `full_name` | VARCHAR(255) | | User's full name |
 | `subscription_tier` | VARCHAR(50) | DEFAULT 'free' | 'free', 'explorer', 'pro', 'business' |

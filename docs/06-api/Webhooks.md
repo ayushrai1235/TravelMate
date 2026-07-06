@@ -43,14 +43,14 @@ All webhooks are received by the Next.js API Routes (BFF) which handles signatur
 
 ---
 
-## 3. Clerk Webhooks
+## 3. Supabase Webhooks
 
-**Endpoint:** `POST /api/webhooks/clerk`  
+**Endpoint:** `POST /api/webhooks/supabase`  
 **Security:** Svix signature verification using `CLERK_WEBHOOK_SECRET`
 
 ### 3.1 Handled Events
 
-| Clerk Event | TravelMate Action |
+| Supabase Event | TravelMate Action |
 |---|---|
 | `user.created` | Create user record in PostgreSQL, initialize preferences |
 | `user.updated` | Update email/name in PostgreSQL |
@@ -59,7 +59,7 @@ All webhooks are received by the Next.js API Routes (BFF) which handles signatur
 
 ### 3.2 Idempotency
 
-Clerk webhooks may be delivered multiple times. The FastAPI endpoint must use the `id` from the payload to ensure operations (like user creation) are idempotent. `INSERT ... ON CONFLICT DO NOTHING`.
+Supabase webhooks may be delivered multiple times. The FastAPI endpoint must use the `id` from the payload to ensure operations (like user creation) are idempotent. `INSERT ... ON CONFLICT DO NOTHING`.
 
 ---
 
@@ -72,5 +72,5 @@ To test webhooks locally:
 stripe listen --forward-to localhost:3000/api/webhooks/stripe
 ```
 
-**Clerk:**
-Use ngrok or LocalTunnel to expose port 3000, then configure the Clerk dashboard webhook endpoint to point to the ngrok URL.
+**Supabase:**
+Use ngrok or LocalTunnel to expose port 3000, then configure the Supabase dashboard webhook endpoint to point to the ngrok URL.

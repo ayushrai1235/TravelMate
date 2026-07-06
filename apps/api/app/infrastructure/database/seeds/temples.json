@@ -1,0 +1,65 @@
+[
+  {
+    "id": "temple_trimbakeshwar",
+    "name": "Trimbakeshwar Jyotirling Mandir",
+    "lat": 19.9322,
+    "lng": 73.5291,
+    "city": "Trimbakeshwar",
+    "state": "Maharashtra",
+    "timings": {
+      "opens": "05:30",
+      "closes": "21:00",
+      "aarti": ["05:30", "13:00", "19:00"],
+      "closure_days": []
+    },
+    "darshan_info": {
+      "free_darshan": true,
+      "paid_darshan": true,
+      "queue_estimate": "30-90 minutes depending on season"
+    },
+    "dress_code": "Modest temple attire recommended.",
+    "last_verified_at": "2026-07-01T00:00:00Z"
+  },
+  {
+    "id": "temple_somnath",
+    "name": "Somnath Jyotirling Temple",
+    "lat": 20.8880,
+    "lng": 70.4012,
+    "city": "Somnath",
+    "state": "Gujarat",
+    "timings": {
+      "opens": "06:00",
+      "closes": "21:00",
+      "aarti": ["07:00", "12:00", "19:00"],
+      "closure_days": []
+    },
+    "darshan_info": {
+      "free_darshan": true,
+      "paid_darshan": false,
+      "queue_estimate": "20-60 minutes"
+    },
+    "dress_code": "Modest attire recommended; photography restrictions apply inside.",
+    "last_verified_at": "2026-07-01T00:00:00Z"
+  },
+  {
+    "id": "temple_dagdusheth_pune",
+    "name": "Shreemant Dagdusheth Halwai Ganpati Mandir",
+    "lat": 18.5164,
+    "lng": 73.8562,
+    "city": "Pune",
+    "state": "Maharashtra",
+    "timings": {
+      "opens": "06:00",
+      "closes": "23:00",
+      "aarti": ["07:30", "13:30", "20:00"],
+      "closure_days": []
+    },
+    "darshan_info": {
+      "free_darshan": true,
+      "paid_darshan": false,
+      "queue_estimate": "15-45 minutes"
+    },
+    "dress_code": "Modest attire recommended.",
+    "last_verified_at": "2026-07-01T00:00:00Z"
+  }
+]

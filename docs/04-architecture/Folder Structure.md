@@ -50,9 +50,9 @@ apps/web/
 │   │   │
 │   │   ├── (auth)/             # Auth group layout (no navbar)
 │   │   │   ├── sign-in/
-│   │   │   │   └── page.tsx    # Clerk sign-in page
+│   │   │   │   └── page.tsx    # Supabase sign-in page
 │   │   │   └── sign-up/
-│   │   │       └── page.tsx    # Clerk sign-up page
+│   │   │       └── page.tsx    # Supabase sign-up page
 │   │   │
 │   │   ├── (app)/              # Main app group layout (with navbar + sidebar)
 │   │   │   ├── layout.tsx      # App shell layout
@@ -186,7 +186,7 @@ apps/web/
 │   ├── styles/
 │   │   └── animations.css          # Custom animation classes
 │   │
-│   └── middleware.ts               # Next.js middleware (Clerk auth)
+│   └── middleware.ts               # Next.js middleware (Supabase auth)
 │
 ├── next.config.ts
 ├── tailwind.config.ts
@@ -229,7 +229,7 @@ apps/api/
 │   │   │   ├── hotels.py           # GET /v1/hotels
 │   │   │   ├── notifications.py    # POST /v1/notifications/subscribe
 │   │   │   ├── admin.py            # Admin-only endpoints
-│   │   │   └── webhooks.py         # Stripe, Clerk webhooks
+│   │   │   └── webhooks.py         # Stripe, Supabase webhooks
 │   │   └── health.py               # GET /health, GET /health/ready
 │   │
 │   ├── domain/

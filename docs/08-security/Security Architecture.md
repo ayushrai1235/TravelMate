@@ -9,7 +9,7 @@
 
 ## 1. Security Philosophy
 
-1. **Zero Trust:** Do not trust the frontend. The BFF verifies the Clerk session; the FastAPI backend verifies the BFF request.
+1. **Zero Trust:** Do not trust the frontend. The BFF verifies the Supabase session; the FastAPI backend verifies the BFF request.
 2. **Defense in Depth:** Multiple layers of security (WAF, Authentication, RBAC, DB constraints).
 3. **Least Privilege:** Services, agents, and database roles only have access to what they explicitly need.
 4. **Data Minimization:** Only collect PII that is absolutely necessary for travel planning.
@@ -21,7 +21,7 @@
 ### 2.1 Network Layer
 - All traffic over HTTPS (TLS 1.3). HTTP requests are strictly redirected to HTTPS at the edge.
 - **Vercel Edge:** Acts as a Web Application Firewall (WAF) blocking basic volumetric DDoS attacks.
-- **Backend Isolation:** FastAPI runs on Railway. It exposes a single public endpoint, but all requests MUST include a valid Next.js BFF signature or Clerk JWT. Database port is NOT exposed publicly.
+- **Backend Isolation:** FastAPI runs on Railway. It exposes a single public endpoint, but all requests MUST include a valid Next.js BFF signature or Supabase JWT. Database port is NOT exposed publicly.
 
 ### 2.2 Environment Segregation
 - **Development:** Local environments connect to local DBs or isolated staging resources.
@@ -33,13 +33,13 @@
 ## 3. Application Security
 
 ### 3.1 Authentication (AuthN)
-Managed entirely by Clerk.
+Managed entirely by Supabase.
 - Multi-factor authentication (MFA) supported.
 - Passwordless login (OTP) preferred to eliminate credential stuffing risks.
 - Session tokens are stored in `HttpOnly`, `Secure`, `SameSite=Lax` cookies.
 
 ### 3.2 Authorization (AuthZ)
-- **Role-Based Access Control (RBAC):** Users are assigned roles (e.g., `user`, `admin`) in Clerk.
+- **Role-Based Access Control (RBAC):** Users are assigned roles (e.g., `user`, `admin`) in Supabase.
 - **Resource Ownership:** The FastAPI backend enforces that a user can only read/modify trips where `trip.user_id == current_user.id`.
 
 ```python
@@ -85,7 +85,7 @@ async def get_current_user_trip(
 ## 5. Third-Party Integrations
 
 - **Stripe:** TravelMate AI never touches credit card data. The frontend uses Stripe Elements, and backend only processes webhook events. PCI compliance is handled by Stripe.
-- **Clerk:** Identity data is handled by Clerk.
+- **Supabase:** Identity data is handled by Supabase.
 - **Gemini:** We have a zero-data-retention agreement (API data is not used for model training).
 
 ---

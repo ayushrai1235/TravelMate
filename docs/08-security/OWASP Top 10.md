@@ -17,11 +17,11 @@ This document maps TravelMate AI's architecture against the OWASP Top 10 (2021) 
 
 ### A01:2021-Broken Access Control
 - **Risk:** User A accessing User B's trips.
-- **Mitigation:** The FastAPI backend strictly enforces ownership checks (`trip.user_id == current_user.id`) on all read/write operations via dependency injection. Clerk handles session invalidation.
+- **Mitigation:** The FastAPI backend strictly enforces ownership checks (`trip.user_id == current_user.id`) on all read/write operations via dependency injection. Supabase handles session invalidation.
 
 ### A02:2021-Cryptographic Failures
 - **Risk:** Exposure of sensitive data in transit or at rest.
-- **Mitigation:** TLS 1.3 enforced at the edge. HSTS header included. DB encrypted at rest. No passwords stored in our DB (delegated to Clerk).
+- **Mitigation:** TLS 1.3 enforced at the edge. HSTS header included. DB encrypted at rest. No passwords stored in our DB (delegated to Supabase).
 
 ### A03:2021-Injection
 - **Risk:** SQL Injection or Prompt Injection.
@@ -43,11 +43,11 @@ This document maps TravelMate AI's architecture against the OWASP Top 10 (2021) 
 
 ### A07:2021-Identification and Authentication Failures
 - **Risk:** Brute force attacks, credential stuffing.
-- **Mitigation:** Delegated entirely to Clerk, which provides built-in brute-force protection, bot detection, and supports passwordless/MFA.
+- **Mitigation:** Delegated entirely to Supabase, which provides built-in brute-force protection, bot detection, and supports passwordless/MFA.
 
 ### A08:2021-Software and Data Integrity Failures
 - **Risk:** CI/CD pipeline compromised, untrusted deserialization.
-- **Mitigation:** GitHub Actions uses signed commits and strict permissions. No pickle deserialization used in Python (JSON only). Clerk and Stripe webhooks verify cryptographic signatures.
+- **Mitigation:** GitHub Actions uses signed commits and strict permissions. No pickle deserialization used in Python (JSON only). Supabase and Stripe webhooks verify cryptographic signatures.
 
 ### A09:2021-Security Logging and Monitoring Failures
 - **Risk:** Breach goes undetected.

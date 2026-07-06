@@ -66,7 +66,7 @@ All logs are **structured JSON**. No plaintext log lines. Every log entry includ
 | Data | Reason |
 |---|---|
 | Full JWT tokens | Security — token theft risk |
-| Raw user passwords | Clerk handles auth; we never see passwords |
+| Raw user passwords | Supabase handles auth; we never see passwords |
 | Full email addresses | PII — mask as `r***@example.com` |
 | Full phone numbers | PII — mask as `+91****1234` |
 | Credit card numbers | PCI compliance (Stripe handles directly) |

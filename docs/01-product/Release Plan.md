@@ -29,7 +29,7 @@ TravelMate AI follows a **progressive release model**:
 - Basic trip planning UI (non-functional, UI only)
 - API scaffolding running locally
 - Database schema deployed
-- Authentication flow working (Clerk)
+- Authentication flow working (Supabase)
 
 **Exit Criteria:**
 - All engineers can log in and navigate the app
@@ -65,7 +65,7 @@ TravelMate AI follows a **progressive release model**:
 - Temple timings displayed
 - Budget breakdown
 - Basic AI chat
-- User accounts (Clerk)
+- User accounts (Supabase)
 - Offline PDF export
 - Subscription (Free tier only)
 

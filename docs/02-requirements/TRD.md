@@ -76,7 +76,7 @@ This Technical Requirements Document defines the engineering constraints, techno
 | **Flights** | Amadeus for Developers | Flight schedule and pricing | Self-service |
 | **Weather** | OpenWeatherMap | 7-day forecasts | One Call API plan |
 | **Bus GTFS** | GSRTC, MSRTC (public feeds) | Bus schedules | Free (public data) |
-| **Authentication** | Clerk | User management, OAuth | Pro plan |
+| **Authentication** | Supabase | User management, OAuth | Pro plan |
 | **Payments** | Stripe | Subscriptions, payments | Standard plan |
 | **AI LLM** | Google Gemini 3.5 Flash | Agent reasoning, chat | API plan |
 | **Image Storage** | Cloudinary | Image uploads and optimization | Free tier |
@@ -164,7 +164,7 @@ Infrastructure Layer  → Database, cache, external API clients
 
 | Requirement | Specification |
 |---|---|
-| Authentication | Clerk JWT tokens; verified on every protected request |
+| Authentication | Supabase JWT tokens; verified on every protected request |
 | Authorization | Role-based: user, admin; checked in middleware |
 | Data encryption (rest) | AES-256 for sensitive fields (location history) |
 | Data encryption (transit) | TLS 1.3 minimum |

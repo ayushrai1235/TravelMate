@@ -160,7 +160,7 @@
 
 ## AC-SEC-001: Authentication
 
-**Feature:** User authentication via Clerk
+**Feature:** User authentication via Supabase
 
 **Given** a user attempts to access protected features,  
 **Then:**
@@ -169,7 +169,7 @@
 |---|---|---|
 | 1 | Unauthenticated user plans a trip | Trip planning works (no auth required for 3 free trips) |
 | 2 | Unauthenticated user hits free trip limit | Prompted to sign up to continue |
-| 3 | User signs in with Google | Clerk OAuth flow; redirected back to app with session |
+| 3 | User signs in with Google | Supabase OAuth flow; redirected back to app with session |
 | 4 | User signs in with email | OTP sent to email; session created after verification |
 | 5 | Session expires | User redirected to login; unsaved trip is preserved in session storage |
 | 6 | JWT token invalid | 401 returned; frontend redirects to login |

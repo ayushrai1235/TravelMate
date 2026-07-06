@@ -298,7 +298,7 @@ Step 9: Day-of notifications activated
 | RailwayAPI.in or RapidAPI Indian Railways | External API | Critical |
 | OpenWeatherMap or IMD API | External API | High |
 | GTFS feeds (GSRTC, MSRTC, BMTC) | Data feed | High |
-| Clerk Authentication | External Service | Critical |
+| Supabase Authentication | External Service | Critical |
 | Stripe | External Service | High |
 | Cloudinary | External Service | Medium |
 | Google Gemini 3.5 Flash | AI Provider | Critical |

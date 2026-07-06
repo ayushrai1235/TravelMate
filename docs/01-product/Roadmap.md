@@ -24,7 +24,7 @@ The roadmap is organized into three time horizons:
 ### Sprint 1–2: Infrastructure Setup
 - Next.js 16 + FastAPI project scaffolding
 - PostgreSQL + Redis setup (Docker)
-- Clerk authentication integration
+- Supabase Auth integration
 - Stripe subscription integration (Free, Explorer, Pro tiers)
 - CI/CD pipeline (GitHub Actions → Vercel + Railway)
 - Environment variable management

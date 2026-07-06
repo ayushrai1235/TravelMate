@@ -44,11 +44,11 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[User clicks Sign In] --> B[Clerk sign-in modal opens]
+    A[User clicks Sign In] --> B[Supabase sign-in modal opens]
     B --> C{Auth method?}
     C -->|Google OAuth| D[Google consent screen]
     D --> E{Consent granted?}
-    E -->|Yes| F[Clerk creates session]
+    E -->|Yes| F[Supabase creates session]
     E -->|No| G[Return to sign-in]
     C -->|Email OTP| H[User enters email]
     H --> I[OTP sent to email]
@@ -84,7 +84,7 @@ flowchart TD
     H --> I{Payment result?}
     I -->|Success| J[Stripe webhook: checkout.session.completed]
     J --> K[Backend updates user subscription in DB]
-    K --> L[Clerk metadata updated with tier]
+    K --> L[Supabase metadata updated with tier]
     L --> M[User redirected to /planner]
     M --> N[Full feature access enabled]
     I -->|Cancel| O[User returns to app - no change]

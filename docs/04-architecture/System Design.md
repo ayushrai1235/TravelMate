@@ -124,7 +124,7 @@ The FastAPI backend is **stateless**. All state is externalized:
 
 | State | Storage | Justification |
 |---|---|---|
-| User sessions | Clerk (hosted) + Redis (cache) | Clerk is the auth source of truth |
+| User sessions | Supabase (hosted) + Redis (cache) | Supabase is the auth source of truth |
 | Trip data | PostgreSQL | Durable, queryable |
 | Cache | Redis | Fast, evictable |
 | AI conversation | Redis (session TTL) | Ephemeral; cleared after 1 hour inactivity |

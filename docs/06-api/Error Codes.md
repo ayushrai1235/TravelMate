@@ -83,7 +83,7 @@ All API errors return a JSON response in the following format:
 
 The Next.js frontend has a centralized `apiClient` (Axios wrapper) that intercepts errors:
 
-1. **401 Unauthorized:** Automatically triggers Clerk re-authentication or redirects to `/sign-in`.
+1. **401 Unauthorized:** Automatically triggers Supabase re-authentication or redirects to `/sign-in`.
 2. **403 TIER_LIMIT_REACHED:** Pops up the subscription modal.
 3. **429 Rate Limit:** Automatically retries once with exponential backoff before showing an error toast.
 4. **5xx Server Errors:** Shows generic "Something went wrong" toast with the `request_id` for support.

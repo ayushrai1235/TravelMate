@@ -129,8 +129,8 @@ Web app will be available at `http://localhost:3000`
 **Q: Database connection refused?**
 A: Ensure Docker is running and you executed `docker-compose up -d`. Check if port 5432 is already in use by a local Postgres installation.
 
-**Q: Clerk authentication failing locally?**
-A: Ensure your `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is correct in `.env.local` and that you are accessing the app via `localhost:3000` (Clerk requires specific origins).
+**Q: Supabase Auth failing locally?**
+A: Ensure your `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is correct in `.env.local` and that you are accessing the app via `localhost:3000` (Supabase requires specific origins).
 
 **Q: Alembic migrations throwing errors?**
 A: Ensure your `DATABASE_URL` uses the `+asyncpg` driver locally (as defined in the `.env` example).
