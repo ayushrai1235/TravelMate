@@ -12,8 +12,8 @@ type ProxyOptions = {
 
 export async function proxyToBackend({ backendPath, request }: ProxyOptions) {
   const requestId = request.headers.get('x-request-id') ?? `req_${crypto.randomUUID()}`
-  const cookieStore = cookies()
-  const supabase = createClient()
+  const cookieStore = await cookies()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()

@@ -8,8 +8,10 @@ _memory_cache: dict[str, tuple[float, Any]] = {}
 
 
 class CacheService:
+    _redis_unavailable = False
+
     def __init__(self, client: redis.Redis | None):
-        self.client = client
+        self.client = client if not CacheService._redis_unavailable else None
 
     async def get_json(self, key: str) -> Any | None:
         if self.client is not None:
@@ -17,7 +19,9 @@ class CacheService:
                 raw = await self.client.get(key)
                 if raw is not None:
                     return json.loads(raw)
-            except (redis.RedisError, json.JSONDecodeError):
+            except redis.RedisError:
+                CacheService._redis_unavailable = True
+            except json.JSONDecodeError:
                 pass
 
         cached = _memory_cache.get(key)
@@ -36,7 +40,7 @@ class CacheService:
                 await self.client.set(key, json.dumps(value, default=str), ex=ttl_seconds)
                 return
             except redis.RedisError:
-                pass
+                CacheService._redis_unavailable = True
 
         _memory_cache[key] = (time.time() + ttl_seconds, value)
 
@@ -45,5 +49,6 @@ class CacheService:
             try:
                 await self.client.delete(key)
             except redis.RedisError:
-                pass
+                CacheService._redis_unavailable = True
         _memory_cache.pop(key, None)
+

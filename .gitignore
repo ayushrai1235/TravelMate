@@ -13,6 +13,8 @@
 # next.js
 /.next/
 /out/
+**/.next/
+**/out/
 
 # production
 /build
@@ -25,9 +27,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
 # local env files
 .env*.local
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
 
 # vercel
 .vercel
@@ -35,8 +43,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-supabase
+/supabase/
 .agents
+
+# local smoke-test artifacts
+apps/web/.home-smoke.png
+apps/web/.login-smoke.png
+apps/web/.sign-in-smoke.png
+apps/web/.sign-up-smoke.png
+apps/web/.planner-redirect-smoke.png
+apps/web/.playwright-*.png
+playwright-report/
+test-results/
 
 # python
 __pycache__/
@@ -45,4 +63,4 @@ __pycache__/
 venv/
 .env
 
-versions
+versions/

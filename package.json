@@ -9,11 +9,14 @@
   ],
   "scripts": {
     "dev:web": "npm run dev --workspace=apps/web",
-    "dev:api": "cd apps/api && poetry run uvicorn app.main:app --reload --port 8000",
+    "dev:api": "cd apps/api && .\\.venv\\Scripts\\uvicorn app.main:app --reload --port 8000",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\""
   },
   "devDependencies": {
     "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "railkit": "^4.0.1"
   }
 }

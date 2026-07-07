@@ -5,11 +5,12 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function GET(request: NextRequest, { params }: RouteContext) {
-  return proxyToBackend({ backendPath: `/v1/temples/${encodeURIComponent(params.id)}`, request })
+  const { id } = await params
+  return proxyToBackend({ backendPath: `/v1/temples/${encodeURIComponent(id)}`, request })
 }
